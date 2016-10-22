@@ -1,0 +1,9 @@
+baseurl = "http://ajgrf.com/"
+title = "Alex Griffin"
+languageCode = "en-us"
+theme = "hyde"
+relativeurls = true
+
+[params]
+copyright = "© 2016 Alex Griffin"
+description = "Programmer"
