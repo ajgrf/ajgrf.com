@@ -1,4 +1,4 @@
-baseurl = "http://ajgrf.com/"
+baseurl = "https://ajgrf.com/"
 title = "Alex Griffin"
 languageCode = "en-us"
 theme = "hyde"
