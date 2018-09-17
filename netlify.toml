@@ -1,0 +1,16 @@
+[build]
+publish = "public"
+command = "hugo"
+environment = { HUGO_VERSION = "0.17" }
+
+[[redirects]]
+from = "https://alexjgriffin.com/*"
+to = "https://ajgrf.com/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "https://www.alexjgriffin.com/*"
+to = "https://ajgrf.com/:splat"
+status = 301
+force = true
