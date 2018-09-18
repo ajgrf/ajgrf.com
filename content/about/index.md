@@ -11,6 +11,7 @@ recently graduated with a BA in Linguistics from the University of
 Minnesota-Twin Cities.
 
 ## Technologies
+
 - Linux (Debian, Red Hat/CentOS, GuixSD, and others)
 - Go
 - Shell scripting (sh, sed, awk)
@@ -21,10 +22,12 @@ Minnesota-Twin Cities.
 - Networking & Monitoring (Nagios, TCP/IP, HTTP)
 
 ## Open Source
+
 - Github Profile: [@ajgrf](https://github.com/ajgrf)
-- [Guix Contributions](http://git.savannah.gnu.org/cgit/guix.git/log/?qt=author&q=Alex+Griffin)
+- [Guix Contributions](https://git.savannah.gnu.org/cgit/guix.git/log/?qt=author&q=Alex+Griffin)
 
 ## Contact Info
+
 If you would like to get in touch, you can reach me at:
 
 - Email: [a@ajgrf.com](mailto:Alex%20Griffin%20%3Ca%40ajgrf.com%3E)
