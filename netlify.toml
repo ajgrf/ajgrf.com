@@ -1,7 +1,7 @@
 [build]
 publish = "public"
 command = "hugo"
-environment = { HUGO_VERSION = "0.17" }
+environment = { HUGO_VERSION = "0.47.1" }
 
 [[redirects]]
 from = "https://alexjgriffin.com/*"
