@@ -5,5 +5,5 @@ theme = "hyde"
 relativeurls = true
 
 [params]
-copyright = "© 2016 Alex Griffin"
+copyright = "© 2018 Alex Griffin"
 description = "Programmer"
