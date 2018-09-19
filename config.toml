@@ -1,7 +1,7 @@
 baseurl = "https://ajgrf.com/"
 title = "Alex Griffin"
 languageCode = "en-us"
-theme = "hyde"
+theme = "xmin"
 relativeurls = true
 
 [params]
