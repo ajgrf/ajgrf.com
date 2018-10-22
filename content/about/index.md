@@ -31,4 +31,4 @@ Minnesota-Twin Cities.
 If you would like to get in touch, you can reach me at:
 
 - Email: [a@ajgrf.com](mailto:Alex%20Griffin%20%3Ca%40ajgrf.com%3E)
-- GPG Key: [2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5](public_key.asc)
+- PGP Key: [2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5](/public_key.asc)
