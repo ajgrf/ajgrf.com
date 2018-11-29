@@ -4,13 +4,13 @@ command = "hugo"
 environment = { HUGO_VERSION = "0.47.1" }
 
 [[redirects]]
-from = "https://alexjgriffin.com/*"
-to = "https://ajgrf.com/:splat"
+from = "https://ajgrf.com/*"
+to = "https://alexjgriffin.com/:splat"
 status = 301
 force = true
 
 [[redirects]]
-from = "https://www.alexjgriffin.com/*"
-to = "https://ajgrf.com/:splat"
+from = "https://www.ajgrf.com/*"
+to = "https://alexjgriffin.com/:splat"
 status = 301
 force = true
