@@ -1,18 +1,23 @@
-# All available Hugo versions are listed here: https://gitlab.com/pages/hugo/container_registry
-image: registry.gitlab.com/pages/hugo:0.47.1
+image: debian:testing
+
+before_script:
+  - apt-get update
+  - apt-get install -y ikiwiki make
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
 test:
+  stage: test
   script:
-  - hugo
+  - make build
   except:
   - master
 
 pages:
+  stage: deploy
   script:
-  - hugo
+  - make build
   artifacts:
     paths:
     - public

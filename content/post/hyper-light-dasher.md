@@ -1,7 +1,5 @@
-+++
-date = "2018-10-04T10:30:00-05:00"
-title = "Automating Hyper Light Drifter's 800 Dash Challenge on the Nintendo Switch"
-+++
+[[!meta title="Automating Hyper Light Drifter's 800 Dash Challenge on the Nintendo Switch"]]
+[[!meta date="2018-10-04T10:30:00-05:00"]]
 
 I do all of my gaming these days on a Nintendo Switch (with the exception of
 [Zachtronics][1] games on my Linux machine).  Lately I've been playing [Hyper

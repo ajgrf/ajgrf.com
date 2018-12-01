@@ -1,10 +1,5 @@
-+++
-menu = "main"
-date = "2016-10-20T12:00:00-05:00"
-title = "About"
-Description = ""
-
-+++
+[[!meta title="About"]]
+[[!meta date="2016-10-20T12:00:00-05:00"]]
 
 Hi, my name is Alex. I'm a self-taught programmer and open source enthusiast. I
 recently graduated with a BA in Linguistics from the University of

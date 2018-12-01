@@ -1,7 +1,5 @@
-+++
-date = "2018-09-19T11:00:00-05:00"
-title = "How to Set Up Dynamic DNS with OpenWrt and Gandi LiveDNS"
-+++
+[[!meta title="How to Set Up Dynamic DNS with OpenWrt and Gandi LiveDNS"]]
+[[!meta date="2018-09-19T11:00:00-05:00"]]
 
 [OpenWrt](https://openwrt.org/) supports quite a few dynamic DNS providers in
 its very nice ddns-scripts package. Many of them are free, but if you already

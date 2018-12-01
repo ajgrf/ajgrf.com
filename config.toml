@@ -1,9 +1,0 @@
-baseurl = "https://alexjgriffin.com/"
-title = "Alex Griffin"
-languageCode = "en-us"
-theme = "xmin"
-relativeurls = true
-
-[params]
-copyright = "© 2018 Alex Griffin"
-description = "Programmer"
