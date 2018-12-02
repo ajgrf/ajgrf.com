@@ -75,7 +75,7 @@ default_pageext: md
 # extension to use for html files
 htmlext: html
 # strftime format string to display date
-timeformat: '%c'
+timeformat: '%B %-d, %Y'
 # UTF-8 locale to use
 #locale: en_US.UTF-8
 # put user pages below specified page
