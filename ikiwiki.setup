@@ -20,7 +20,7 @@ srcdir: ./content
 # where to build the wiki
 destdir: ./public
 # base url to the wiki
-url: http://alexjgriffin.com/
+url: https://www.alexjgriffin.com/
 # url to the ikiwiki.cgi
 cgiurl: ''
 # do not adjust cgiurl if CGI is accessed via different URL

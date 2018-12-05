@@ -1,2 +1,2 @@
 - [[About|about]]
-- [[Archives|archives]]
+- [[Archives|post]]
