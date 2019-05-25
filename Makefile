@@ -2,6 +2,7 @@ all: preview
 
 build:
 	@ikiwiki --setup ikiwiki.setup
+	@./acme-challenge.sh
 
 clean:
 	@echo "Cleaning ./public destdir..."
