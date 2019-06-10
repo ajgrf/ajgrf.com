@@ -18,7 +18,8 @@ Minnesota-Twin Cities.
 
 ## Open Source
 
-- Github Profile: [@ajgrf](https://github.com/ajgrf)
+- GitHub Profile: [@ajgrf](https://github.com/ajgrf)
+- GitLab Profile: [@ajgrf](https://gitlab.com/ajgrf)
 - [Guix Contributions](https://git.savannah.gnu.org/cgit/guix.git/log/?qt=author&q=Alex+Griffin)
 
 ## Contact Info
