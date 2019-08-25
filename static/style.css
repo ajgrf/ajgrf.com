@@ -1,0 +1,85 @@
+body {
+    background-color: #ffffff;
+    color: #191919;
+    font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+}
+
+.container, #content {
+    margin: 0 auto;
+    max-width: 40em;
+    padding: 0 1em;
+}
+
+nav, h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+}
+
+nav, h1, h2, h3, h4, h5, h6, .date {
+    font-family: "Source Serif Pro", "Apple Garamond", "Baskerville", "Noto Serif", "Times New Roman", Times, serif;
+    font-weight: 400;
+}
+
+nav {
+    border-bottom: 1px solid #cccccc;
+    padding: 0.5em 0;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+.brand {
+    font-size: 1.3em;
+}
+
+.split {
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-link {
+    margin-left: 1em;
+}
+
+#postamble {
+    border-top: 1px solid #cccccc;
+    margin-top: 1.5em;
+}
+
+.date {
+    font-style: italic;
+}
+
+a {
+    color: #191919;
+}
+
+#content a:visited {
+    color: #555555;
+}
+
+code, .src {
+    color: #000000;
+    font-family: "Go Mono", PragmataPro, Iosevka, "Source Code Pro", Menlo, "Noto Mono", "DejaVu Sans Mono", "Liberation Mono", Consolas, "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace;
+    font-size: 0.8em;
+}
+
+.src {
+    background-color: #ffffea;
+    border: 1px solid #ccccbb;
+    padding: 0.5em 1em;
+}
+
+.org-string {
+    color: #005500;
+}
+
+.org-comment {
+    color: #663311;
+    font-style: italic;
+}

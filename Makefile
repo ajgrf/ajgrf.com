@@ -1,15 +1,12 @@
-all: preview
+all: build
 
 build:
-	@ikiwiki --setup ikiwiki.setup
+	@emacs --quick --script publish.el --funcall=org-publish-all
 
 clean:
-	@echo "Cleaning ./public destdir..."
-	@rm -rf ./public
+	@rm -rf ./public ./cache ./content/post/index.org
 
-preview:
-	@mkdir -p public/css public/fonts public/js
-	@ikiwiki --setup ikiwiki.setup --no-usedirs --set bootstrap_local=1
-	@echo "Open `readlink -e ./public/index.html` to view the wiki".
+preview: build
+	@cd ./public && python3 -m http.server 8000
 
 .PHONY: all build clean preview

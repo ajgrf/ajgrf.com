@@ -1,2 +1,0 @@
-- [[About|about]]
-- [[Archives|post]]

@@ -1,11 +1,8 @@
-image: debian:testing
+image: debian
 
 before_script:
   - apt-get update
-  - apt-get install -y ikiwiki make
-
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
+  - apt-get install -y emacs make
 
 test:
   stage: test

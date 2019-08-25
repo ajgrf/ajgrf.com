@@ -1,2 +1,3 @@
-/content/.ikiwiki
 /public
+/cache
+/content/post/index.org
