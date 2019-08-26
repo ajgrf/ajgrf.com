@@ -31,15 +31,21 @@
 
 (require 'htmlize)
 (require 'ox-publish)
+(require 'webfeeder)
 
 (setq make-backup-files nil
+      org-export-with-author nil
+      org-export-with-date t
       org-export-with-section-numbers nil
       org-export-with-title t
-      org-export-with-date t
       org-export-with-toc nil
       org-html-htmlize-output-type 'css
       org-html-metadata-timestamp-format "%B %-d, %Y"
       org-publish-timestamp-directory "./cache/")
+
+(setq ajgrf/head-extra
+      "<link rel='stylesheet' href='/style.css'/>
+<link href='/atom.xml' type='application/atom+xml' rel='alternate' title='Alex Griffin'/>")
 
 (setq ajgrf/preamble "
 <nav>
@@ -84,7 +90,7 @@ Pass TITLE and LIST to `org-publish-sitemap-default'."
          :publishing-function org-html-publish-to-html
          :html-head-include-default-style nil
          :html-head-include-scripts nil
-         :html-head-extra "<link rel='stylesheet' href='/style.css'/>"
+         :html-head-extra ,ajgrf/head-extra
          :auto-sitemap t
          :sitemap-title "Archives"
          :sitemap-filename "index.org"
@@ -99,7 +105,7 @@ Pass TITLE and LIST to `org-publish-sitemap-default'."
          :publishing-function org-html-publish-to-html
          :html-head-include-default-style nil
          :html-head-include-scripts nil
-         :html-head-extra "<link rel='stylesheet' href='/style.css'/>")
+         :html-head-extra ,ajgrf/head-extra)
         ("site-static"
          :base-directory "./static"
          :recursive t
@@ -108,6 +114,28 @@ Pass TITLE and LIST to `org-publish-sitemap-default'."
          :publishing-function org-publish-attachment)
         ("site"
          :components ("site-posts" "site-other" "site-static"))))
+
+(defun ajgrf/publish ()
+  "Publish site, including web feeds."
+  (org-publish-all)
+  (setq webfeeder-default-author "Alex Griffin <a@ajgrf.com>")
+  (webfeeder-build
+   "rss.xml"
+   "./public"
+   "https://www.alexjgriffin.com/"
+   (delete "index.html"
+           (mapcar (lambda (f) (replace-regexp-in-string ".*/public/" "" f))
+                   (directory-files-recursively "public" "index.html")))
+   :builder 'webfeeder-make-rss
+   :title "Alex Griffin")
+  (webfeeder-build
+   "atom.xml"
+   "./public"
+   "https://ajgrf.com/"
+   (delete "index.html"
+           (mapcar (lambda (f) (replace-regexp-in-string ".*/public/" "" f))
+                   (directory-files-recursively "public" "index.html")))
+   :title "Alex Griffin"))
 
 (provide 'publish)
 ;;; publish.el ends here

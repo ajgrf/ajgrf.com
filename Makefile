@@ -1,7 +1,7 @@
 all: build
 
 build:
-	@emacs --quick --script publish.el --funcall=org-publish-all
+	@emacs --quick --script publish.el --funcall=ajgrf/publish
 
 clean:
 	@rm -rf ./public ./cache ./content/index.org ./content/post/index.org
