@@ -65,8 +65,19 @@
       org-html-postamble t
       org-html-postamble-format `(("en" ,ajgrf/postamble)))
 
+(defun ajgrf/org-publish-sitemap (title list)
+  "Publish sitemap and copy newest post to the homepage.
+Pass TITLE and LIST to `org-publish-sitemap-default'."
+  (let* ((newest (caadr list))
+         (link   (car (org-element-parse-secondary-string newest '(link))))
+         (path   (org-element-property :path link)))
+    (copy-file (concat "./content/post/" path)
+               "./content/index.org"
+               t))
+  (org-publish-sitemap-default title list))
+
 (setq org-publish-project-alist
-      `(("site-org"
+      `(("site-posts"
          :base-directory "./content/post"
          :recursive t
          :publishing-directory "./public/post"
@@ -77,11 +88,14 @@
          :auto-sitemap t
          :sitemap-title "Archives"
          :sitemap-filename "index.org"
+         :sitemap-function ajgrf/org-publish-sitemap
          :sitemap-style list
          :sitemap-sort-files anti-chronologically)
-        ("site-about"
-         :base-directory "./content/about"
-         :publishing-directory "./public/about"
+        ("site-other"
+         :base-directory "./content"
+         :recursive t
+         :exclude "post/.*"
+         :publishing-directory "./public"
          :publishing-function org-html-publish-to-html
          :html-head-include-default-style nil
          :html-head-include-scripts nil
@@ -93,7 +107,7 @@
          :base-extension any
          :publishing-function org-publish-attachment)
         ("site"
-         :components ("site-org" "site-about" "site-static"))))
+         :components ("site-posts" "site-other" "site-static"))))
 
 (provide 'publish)
 ;;; publish.el ends here
