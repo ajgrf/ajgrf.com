@@ -1,7 +1,7 @@
 all: build
 
 build:
-	@emacs --quick --script publish.el --funcall=ajgrf/publish
+	@emacs --quick --script publish.el --funcall=org-publish-all
 	@sed -i 's/index.html//g' ./public/post/index.html
 
 clean:
