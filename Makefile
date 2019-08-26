@@ -2,6 +2,7 @@ all: build
 
 build:
 	@emacs --quick --script publish.el --funcall=ajgrf/publish
+	@sed -i 's/index.html//g' ./public/post/index.html
 
 clean:
 	@rm -rf ./public ./cache ./content/index.org ./content/post/index.org

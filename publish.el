@@ -52,8 +52,8 @@
   <div class=\"container split\">
     <a class=\"brand\" href=\"/\">Alex Griffin</a>
     <span>
-      <a class=\"nav-link\" href=\"/about/index.html\">About</a>
-      <a class=\"nav-link\" href=\"/post/index.html\">Archives</a>
+      <a class=\"nav-link\" href=\"/about/\">About</a>
+      <a class=\"nav-link\" href=\"/post/\">Archives</a>
     </span>
   </div>
 </nav>
