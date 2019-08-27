@@ -77,6 +77,10 @@ code, .src {
     padding: 0.5em 1em;
 }
 
+.src::selection, .src ::selection {
+    background-color: #eeee9e;
+}
+
 .org-string {
     color: #005500;
 }
