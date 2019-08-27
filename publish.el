@@ -51,13 +51,17 @@
     </span>
   </div>
 </nav>
+<div class=\"container\">
+  <p class=\"date\">%d</p>
+</div>
 ")
 
 (setq ajgrf/postamble "
-<div class=\"container split\">
-  <span>&copy; 2019 Alex Griffin. All rights reserved.</span>
-  <span class=\"date\">%d</span>
-</div>
+<footer>
+  <div class=\"container\">
+    &copy; 2019 Alex Griffin. All rights reserved.
+  </div>
+</footer>
 ")
 
 (setq org-html-preamble  t

@@ -46,13 +46,14 @@ nav a {
     margin-left: 1em;
 }
 
-#postamble {
+footer {
     border-top: 1px solid #cccccc;
     margin-top: 1.5em;
 }
 
-.date {
+.date:not(:empty) {
     font-style: italic;
+    margin-bottom: -1em;
 }
 
 a {
