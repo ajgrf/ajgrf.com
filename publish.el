@@ -63,7 +63,8 @@
 (setq ajgrf/postamble "
 <footer>
   <div class=\"container\">
-    &copy; 2019 Alex Griffin. All rights reserved.
+    &copy; 2019 Alex Griffin. Unless otherwise noted, licensed under the
+    <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>.
   </div>
 </footer>
 ")
