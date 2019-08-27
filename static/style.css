@@ -73,6 +73,7 @@ code, .src {
 .src {
     background-color: #ffffea;
     border: 1px solid #ccccbb;
+    overflow: auto;
     padding: 0.5em 1em;
 }
 
