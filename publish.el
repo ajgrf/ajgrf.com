@@ -41,6 +41,10 @@
       org-html-metadata-timestamp-format "%B %-d, %Y"
       org-publish-timestamp-directory "./cache/")
 
+(setq ajgrf/head-extra
+      "<link rel=\"stylesheet\" href=\"/style.css\"/>
+<link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\"/>")
+
 (setq ajgrf/preamble "
 <nav>
   <div class=\"container split\">
@@ -88,7 +92,7 @@ Pass TITLE and LIST to `org-publish-sitemap-default'."
          :publishing-function org-html-publish-to-html
          :html-head-include-default-style nil
          :html-head-include-scripts nil
-         :html-head-extra "<link rel='stylesheet' href='/style.css'/>"
+         :html-head-extra ,ajgrf/head-extra
          :auto-sitemap t
          :sitemap-title "Archives"
          :sitemap-filename "index.org"
@@ -103,7 +107,7 @@ Pass TITLE and LIST to `org-publish-sitemap-default'."
          :publishing-function org-html-publish-to-html
          :html-head-include-default-style nil
          :html-head-include-scripts nil
-         :html-head-extra "<link rel='stylesheet' href='/style.css'/>")
+         :html-head-extra ,ajgrf/head-extra)
         ("site-static"
          :base-directory "./static"
          :recursive t
