@@ -18,7 +18,7 @@ nav, h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
 }
 
-nav, h1, h2, h3, h4, h5, h6, .date {
+nav, footer, h1, h2, h3, h4, h5, h6, .date {
     font-family: "Source Serif Pro", "Apple Garamond", "Baskerville", "Noto Serif", "Times New Roman", Times, serif;
     font-weight: 400;
 }
