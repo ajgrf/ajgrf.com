@@ -62,5 +62,5 @@ duration? It turns out that they're simply the number of times the main
 loop should repeatedly report the same input to the console. Since the
 USB polling frequency is 8 ms, and each USB report is echoed 3 times
 (for reasons I don't really understand), then 5 units of duration is
-approximately equal to 5 * 8 * 3 \=\= 120 ms. Similarly, 150 units is
-150 * 8 * 3 \=\= 3600 ms, or about 3.6 seconds.
+approximately equal to 5 * 8 * 3 \equal{}\equal{} 120 ms. Similarly, 150
+units is 150 * 8 * 3 \equal{}\equal{} 3600 ms, or about 3.6 seconds.
