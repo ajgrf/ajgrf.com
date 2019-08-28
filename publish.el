@@ -76,6 +76,59 @@
 </footer>
 ")))
 
+(defun loomcom/get-preview (filename)
+  "Returns a list: '(<needs-more> <preview-string>) where
+<needs-more> is t or nil, indicating whether a \"Read More...\"
+link is needed."
+  (with-temp-buffer
+    (insert-file-contents (concat loomcom/project-dir "blog/" filename))
+    (goto-char (point-min))
+    (let ((content-start (or
+                          ;; Look for the first non-keyword line
+                          (and (re-search-forward "^[^#]" nil t)
+                               (match-beginning 0))
+                          ;; Failing that, assume we're malformed and
+                          ;; have no content
+                          (buffer-size)))
+          (marker (or
+                   (and (re-search-forward "^#\\+BEGIN_more$" nil t)
+                        (match-beginning 0))
+                   (buffer-size))))
+      ;; Return a pair of '(needs-more preview-string)
+      (list (not (= marker (buffer-size)))
+            (buffer-substring content-start marker)))))
+
+(defun loomcom/sitemap (title list)
+  "Generate the sitemap (Blog Main Page)"
+  (concat "#+TITLE: " title "\n" "--------\n"
+          (string-join (mapcar #'car (cdr list)) "\n\n")))
+
+(defun loomcom/sitemap-entry (entry style project)
+  "Sitemap (Blog Main Page) Entry Formatter"
+  (when (not (directory-name-p entry))
+    (format (string-join
+             '("* [[file:%s][%s]]\n"
+               "#+BEGIN_published\n"
+               "%s\n"
+               "#+END_published\n\n"
+               "%s\n"
+               "--------\n"))
+            entry
+            (org-publish-find-title entry project)
+            (format-time-string "%A, %B %_d %Y at %l:%M %p %Z" (org-publish-find-date entry project))
+            (let* ((preview (loomcom/get-preview entry))
+                   (needs-more (car preview))
+                   (preview-text (cadr preview)))
+              (if needs-more
+                  (format
+                   (concat
+                    "%s\n\n"
+                    "#+BEGIN_morelink\n"
+                    "[[file:%s][Read More...]]\n"
+                    "#+END_morelink\n")
+                   preview-text entry)
+                (format "%s" preview-text))))))
+
 (defun ajgrf/newest-entry-on-home-sitemap (title list)
   "Sitemap function to copy newest entry to the homepage.
 TITLE is ignored.  LIST is a representation of the entries."
