@@ -1,6 +1,6 @@
 body {
-    background-color: #ffffff;
-    color: #191919;
+    background-color: #fffff8;
+    color: #111111;
     font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
     font-size: 18px;
     line-height: 1.6;
@@ -57,7 +57,7 @@ footer {
 }
 
 a {
-    color: #191919;
+    color: #111111;
 }
 
 #content a:visited {
