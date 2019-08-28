@@ -327,10 +327,12 @@ The date is set to epoch if the item date is nil."
 address part if email is missing.
 For instance, calling this function on \"foo\" returns (\"foo\" nil)."
   (let ((name+addr (mail-extract-address-components address)))
-    (when (string= (car name+addr)
-                   (cadr name+addr))
-      (setcdr name+addr nil))
-    name+addr))
+    (cond ((string= (car name+addr)
+                    (cadr name+addr))
+           (list (car name+addr)))
+          ((null (car name+addr))
+           (list (cadr name+addr)))
+          (t name+addr))))
 
 (defun webfeeder--format-atom-author (author)
   (concat "<author>"
