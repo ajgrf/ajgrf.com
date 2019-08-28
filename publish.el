@@ -32,7 +32,8 @@
 (require 'htmlize)
 (require 'ox-publish)
 
-(setq make-backup-files nil
+(setq debug-on-error t
+      make-backup-files nil
       org-export-with-section-numbers nil
       org-export-with-title t
       org-export-with-date t
