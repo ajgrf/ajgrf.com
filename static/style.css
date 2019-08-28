@@ -33,7 +33,8 @@ nav {
     padding: 0.5em 0;
 }
 
-nav a {
+nav a, nav a:visited {
+    color: #111111;
     text-decoration: none;
 }
 
@@ -63,11 +64,11 @@ footer {
 }
 
 a {
-    color: #111111;
+    color: #004488;
 }
 
-#content a:visited {
-    color: #55554d;
+a:visited {
+    color: #4d6495;
 }
 
 code, .src {
