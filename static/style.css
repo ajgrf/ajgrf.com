@@ -1,8 +1,11 @@
+html {
+    font-size: 18px;
+}
+
 body {
     background-color: #fffff8;
     color: #111111;
     font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
-    font-size: 18px;
     line-height: 1.6;
     margin: 0;
     text-align: justify;
@@ -10,7 +13,7 @@ body {
 
 .container, #content {
     margin: 0 auto;
-    max-width: 40em;
+    max-width: 40rem;
     padding: 0 1em;
 }
 
@@ -50,6 +53,7 @@ nav a {
 
 footer {
     border-top: 1px solid #ccccbb;
+    font-size: 0.8em;
     margin-top: 1.5em;
 }
 
