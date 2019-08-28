@@ -37,42 +37,41 @@
       org-export-with-title t
       org-export-with-date t
       org-export-with-toc nil
+      org-html-doctype "html5"
+      org-html-head-include-default-style nil
+      org-html-head-include-scripts nil
+      org-html-html5-fancy t
       org-html-htmlize-output-type 'css
       org-html-metadata-timestamp-format "%B %-d, %Y"
+      org-html-preamble  t
+      org-html-postamble t
       org-publish-timestamp-directory "./cache/")
 
-(setq ajgrf/head-extra
+(setq org-html-head-extra
       "<link rel=\"stylesheet\" href=\"/style.css\"/>
 <link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\"/>")
 
-(setq ajgrf/preamble "
-<nav>
-  <div class=\"container split\">
-    <a class=\"brand\" href=\"/\">Alex Griffin</a>
-    <span>
-      <a class=\"nav-link\" href=\"/about/\">About</a>
-      <a class=\"nav-link\" href=\"/post/\">Archives</a>
-    </span>
-  </div>
+(setq org-html-preamble-format '(("en" "<nav>
+<div class=\"container split\">
+<a class=\"brand\" href=\"/\">Alex Griffin</a>
+<span>
+<a class=\"nav-link\" href=\"/about/\">About</a>
+<a class=\"nav-link\" href=\"/post/\">Archives</a>
+</span>
+</div>
 </nav>
 <div class=\"container\">
-  <p class=\"date\">%d</p>
+<p class=\"date\">%d</p>
 </div>
-")
+")))
 
-(setq ajgrf/postamble "
-<footer>
-  <div class=\"container\">
-    &copy; 2019 Alex Griffin. Unless otherwise noted, licensed under the
-    <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>.
-  </div>
+(setq org-html-postamble-format '(("en" "<footer>
+<div class=\"container\">
+&copy; 2019 Alex Griffin. Unless otherwise noted, licensed under the
+<a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>.
+</div>
 </footer>
-")
-
-(setq org-html-preamble  t
-      org-html-preamble-format  `(("en" ,ajgrf/preamble))
-      org-html-postamble t
-      org-html-postamble-format `(("en" ,ajgrf/postamble)))
+")))
 
 (defun ajgrf/org-publish-sitemap (title list)
   "Publish sitemap and copy newest post to the homepage.
@@ -91,9 +90,6 @@ Pass TITLE and LIST to `org-publish-sitemap-default'."
          :recursive t
          :publishing-directory "./public/post"
          :publishing-function org-html-publish-to-html
-         :html-head-include-default-style nil
-         :html-head-include-scripts nil
-         :html-head-extra ,ajgrf/head-extra
          :auto-sitemap t
          :sitemap-title "Archives"
          :sitemap-filename "index.org"
@@ -105,10 +101,7 @@ Pass TITLE and LIST to `org-publish-sitemap-default'."
          :recursive t
          :exclude "post/.*"
          :publishing-directory "./public"
-         :publishing-function org-html-publish-to-html
-         :html-head-include-default-style nil
-         :html-head-include-scripts nil
-         :html-head-extra ,ajgrf/head-extra)
+         :publishing-function org-html-publish-to-html)
         ("site-static"
          :base-directory "./static"
          :recursive t
