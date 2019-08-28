@@ -1,4 +1,5 @@
 #+TITLE: Defining Shell Aliases for Subcommands
+#+AUTHOR: Alex Griffin <a@ajgrf.com>
 #+DATE: <2019-06-11 Tue 14:00>
 
 If you spend any time using the command line, you're probably familiar

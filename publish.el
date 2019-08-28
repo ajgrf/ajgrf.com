@@ -31,6 +31,7 @@
 
 (require 'htmlize)
 (require 'ox-publish)
+(require 'webfeeder)
 
 (setq debug-on-error t
       make-backup-files nil
@@ -43,13 +44,14 @@
       org-html-head-include-scripts nil
       org-html-html5-fancy t
       org-html-htmlize-output-type 'css
-      org-html-metadata-timestamp-format "%B %-d, %Y"
+      org-html-metadata-timestamp-format "%Y-%m-%d"
       org-html-preamble  t
       org-html-postamble t
       org-publish-timestamp-directory "./cache/")
 
 (setq org-html-head-extra
       "<link rel=\"stylesheet\" href=\"/style.css\"/>
+<link rel=\"alternate\" type=\"application/atom+xml\" href=\"/atom.xml\" title=\"Alex Griffin\"/>
 <link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\"/>")
 
 (setq org-html-preamble-format '(("en" "<nav>
@@ -116,6 +118,19 @@ TITLE and LIST are passed to each function."
          :publishing-function org-publish-attachment)
         ("site"
          :components ("site-posts" "site-other" "site-static"))))
+
+(defun ajgrf/publish ()
+  "Publish site, including web feeds."
+  (org-publish-all)
+  (setq webfeeder-default-author "Alex Griffin <a@ajgrf.com>")
+  (webfeeder-build
+   "atom.xml"
+   "./public"
+   "https://ajgrf.com/"
+   (delete "post/index.html"
+           (mapcar (lambda (f) (replace-regexp-in-string ".*/public/" "" f))
+                   (directory-files-recursively "public/post" "index.html")))
+   :title "Alex Griffin"))
 
 (provide 'publish)
 ;;; publish.el ends here
