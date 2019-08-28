@@ -29,7 +29,7 @@ nav, footer, h1, h2, h3, h4, h5, h6, .date {
 
 nav {
     background-color: #eeeeea;
-    border-bottom: 1px solid #ccccbb;
+    border-bottom: 1px solid #ccccc5;
     padding: 0.5em 0;
 }
 
@@ -52,7 +52,7 @@ nav a {
 }
 
 footer {
-    border-top: 1px solid #ccccbb;
+    border-top: 1px solid #ccccc5;
     font-size: 0.8em;
     margin-top: 1.5em;
 }
@@ -67,7 +67,7 @@ a {
 }
 
 #content a:visited {
-    color: #555555;
+    color: #55554d;
 }
 
 code, .src {
