@@ -25,7 +25,8 @@ nav, footer, h1, h2, h3, h4, h5, h6, .date {
 }
 
 nav {
-    border-bottom: 1px solid #cccccc;
+    background-color: #eeeeea;
+    border-bottom: 1px solid #ccccbb;
     padding: 0.5em 0;
 }
 
@@ -48,7 +49,7 @@ nav a {
 }
 
 footer {
-    border-top: 1px solid #cccccc;
+    border-top: 1px solid #ccccbb;
     margin-top: 1.5em;
 }
 
