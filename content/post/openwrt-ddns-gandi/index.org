@@ -1,5 +1,5 @@
 #+TITLE: How to Set Up Dynamic DNS with OpenWrt and Gandi LiveDNS
-#+AUTHOR: Alex Griffin <a@ajgrf.com>
+#+AUTHOR: Alex Griffin
 #+DATE: <2018-09-19 Wed 11:00>
 
 [[https://openwrt.org/][OpenWrt]] supports quite a few dynamic DNS

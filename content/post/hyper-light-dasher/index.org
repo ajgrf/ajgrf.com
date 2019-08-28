@@ -1,5 +1,5 @@
 #+TITLE: Automating Hyper Light Drifter's 800 Dash Challenge on the Nintendo Switch
-#+AUTHOR: Alex Griffin <a@ajgrf.com>
+#+AUTHOR: Alex Griffin
 #+DATE: <2018-10-04 Thu 10:30>
 
 I do all of my gaming these days on a Nintendo Switch (with the

@@ -1,5 +1,5 @@
 #+TITLE: About
-#+AUTHOR: Alex Griffin <a@ajgrf.com>
+#+AUTHOR: Alex Griffin
 #+DATE: <2016-10-20 Thu 12:00>
 
 Hi, my name is Alex. I'm a self-taught programmer and open source

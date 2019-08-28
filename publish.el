@@ -122,7 +122,7 @@ TITLE and LIST are passed to each function."
 (defun ajgrf/publish ()
   "Publish site, including web feeds."
   (org-publish-all)
-  (setq webfeeder-default-author "Alex Griffin <a@ajgrf.com>")
+  (setq webfeeder-default-author "Alex Griffin")
   (webfeeder-build
    "atom.xml"
    "./public"
