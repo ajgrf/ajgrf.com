@@ -74,15 +74,20 @@
 </footer>
 ")))
 
-(defun ajgrf/org-publish-sitemap (title list)
-  "Publish sitemap and copy newest post to the homepage.
-Pass TITLE and LIST to `org-publish-sitemap-default'."
+(defun ajgrf/newest-entry-on-home-sitemap (title list)
+  "Sitemap function to copy newest entry to the homepage.
+TITLE is ignored.  LIST is a representation of the entries."
   (let* ((newest (caadr list))
          (link   (car (org-element-parse-secondary-string newest '(link))))
          (path   (org-element-property :path link)))
     (copy-file (concat "./content/post/" path)
                "./content/index.org"
-               t))
+               t)))
+
+(defun ajgrf/multi-sitemap (title list)
+  "Sitemap function to call multiple sitemap functions in turn.
+TITLE and LIST are passed to each function."
+  (ajgrf/newest-entry-on-home-sitemap title list)
   (org-publish-sitemap-default title list))
 
 (setq org-publish-project-alist
@@ -94,7 +99,7 @@ Pass TITLE and LIST to `org-publish-sitemap-default'."
          :auto-sitemap t
          :sitemap-title "Archives"
          :sitemap-filename "index.org"
-         :sitemap-function ajgrf/org-publish-sitemap
+         :sitemap-function ajgrf/multi-sitemap
          :sitemap-style list
          :sitemap-sort-files anti-chronologically)
         ("site-other"
