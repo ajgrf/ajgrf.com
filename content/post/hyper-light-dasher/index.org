@@ -4,7 +4,7 @@
 I do all of my gaming these days on a Nintendo Switch (with the
 exception of [[http://www.zachtronics.com/][Zachtronics]] games on my
 Linux machine). Lately I've been playing
-[[http://www.heart-machine.com/][Hyper Light Drifter]], a gorgeous
+[[https://heartmachine.com/hyper-light][Hyper Light Drifter]], a gorgeous
 retro-styled action adventure game that its creator calls a mix of 2D
 Zelda and Diablo. The game is challenging, but plays nearly perfectly.
 Except...
@@ -13,8 +13,8 @@ There is one optional challenge which calls for you to dash 800 times
 consecutively in a confined space. This requires you to button mash with
 precise timing while directing the character in a circle to avoid
 bumping into any walls. It's brutal, and
-[[http://www.heart-machine.com/][discussion spaces]] related to the game
-are filled with stories and complaints about this challenge.
+[[https://old.reddit.com/r/hyperlightdrifter/][discussion spaces]] related to
+the game are filled with stories and complaints about this challenge.
 
 After many failed attempts and probably tens of thousands of button
 mashes later, I decided there was probably a better way. On the PC

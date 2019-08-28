@@ -63,11 +63,11 @@ getting our current IP address. The seemingly unset variables above
 (=$username=, =$password=, =$domain=, =$__IP= etc.) will be set by ddns
 once everything else is configured.
 
-Now you can configure ddns (almost) like you normally would, either from
-the luci web interface or with [[https://wiki.openwrt.org/doc/uci][UCI]]
-on the console. Though the meaning of some of the configuration
-variables is probably not obvious unless you read the script above very
-closely.
+Now you can configure ddns (almost) like you normally would, either
+from the luci web interface or with
+[[https://openwrt.org/docs/guide-user/base-system/uci][UCI]] on the
+console. Though the meaning of some of the configuration variables is
+probably not obvious unless you read the script above very closely.
 
 You want to select a custom script as the ddns provider and set it to
 =/etc/ddns/update_gandi_net.sh=. The domain should be the name of the
