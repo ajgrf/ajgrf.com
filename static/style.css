@@ -71,6 +71,12 @@ a:visited {
     color: #4d6495;
 }
 
+hr {
+    height: 1px;
+    background-color: #ccccc5;
+    border: none;
+}
+
 code, .src {
     color: #000000;
     font-family: "Go Mono", PragmataPro, Iosevka, "Source Code Pro", Menlo, "Noto Mono", "DejaVu Sans Mono", "Liberation Mono", Consolas, "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace;

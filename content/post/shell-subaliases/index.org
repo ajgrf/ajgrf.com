@@ -18,6 +18,9 @@ by Git. Git also provides an alias feature very much like shell aliases.
 The command =git config --global alias.st status= defines an alias =st=
 for the =status= subcommand, so that you only need to type =git st=.
 
+#+BEGIN_more
+#+END_more
+
 ** Wrapping Commands with Functions
 
 Another popular command line tool that works using subcommands is =apt=.

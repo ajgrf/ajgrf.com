@@ -102,7 +102,8 @@ link is needed."
 (defun ajgrf/preview-posts-sitemap (title list)
   "Sitemap function to display preview of posts.
 TITLE is ignored.  LIST is a representation of the entries."
-  (concat "#+TITLE: " title "\n\n"
+  (concat "#+TITLE: " title "\n"
+          "#+OPTIONS: title:nil\n\n"
           (string-join (mapcar #'car (cdr list)) "--------\n")))
 
 (defun ajgrf/sitemap-entry (entry style project)
@@ -126,24 +127,21 @@ STYLE is the style of the sitemap. PROJECT is the current project."
                           preview-text entry)
                 (format "%s" preview-text))))))
 
-(defun ajgrf/newest-entry-on-home-sitemap (title list)
-  "Sitemap function to copy newest entry to the homepage.
-TITLE is ignored.  LIST is a representation of the entries."
-  (let* ((newest (caadr list))
-         (link   (car (org-element-parse-secondary-string newest '(link))))
-         (path   (org-element-property :path link)))
-    (copy-file (concat "./content/" path)
-               "./content/index.org"
-               t)))
-
-(defun ajgrf/multi-sitemap (title list)
-  "Sitemap function to call multiple sitemap functions in turn.
-TITLE and LIST are passed to each function."
-  (ajgrf/newest-entry-on-home-sitemap title list)
-  (org-publish-sitemap-default title list))
-
 (setq org-publish-project-alist
-      `(("site-posts"
+      `(("site-home"
+         :base-directory "./content"
+         :recursive t
+         :exclude "about/.*"
+         :publishing-directory "./public"
+         :publishing-function org-html-publish-to-html
+         :auto-sitemap t
+         :sitemap-title "Alex Griffin"
+         :sitemap-filename "index.org"
+         :sitemap-format-entry ajgrf/sitemap-entry
+         :sitemap-function ajgrf/preview-posts-sitemap
+         :sitemap-style list
+         :sitemap-sort-files anti-chronologically)
+        ("site-posts"
          :base-directory "./content/post"
          :recursive t
          :publishing-directory "./public/post"
@@ -151,7 +149,6 @@ TITLE and LIST are passed to each function."
          :auto-sitemap t
          :sitemap-title "Archives"
          :sitemap-filename "index.org"
-         :sitemap-function ajgrf/multi-sitemap
          :sitemap-style list
          :sitemap-sort-files anti-chronologically)
         ("site-other"
@@ -167,7 +164,7 @@ TITLE and LIST are passed to each function."
          :base-extension any
          :publishing-function org-publish-attachment)
         ("site"
-         :components ("site-posts" "site-other" "site-static"))))
+         :components ("site-home" "site-posts" "site-other" "site-static"))))
 
 (defun ajgrf/publish ()
   "Publish site, including web feeds."

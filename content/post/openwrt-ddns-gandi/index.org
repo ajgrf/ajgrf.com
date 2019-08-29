@@ -9,6 +9,9 @@ but if you already pay for a domain name and DNS hosting at
 Unfortunately Gandi is not a supported provider, but it's fairly
 straightforward to get it working with a custom update script.
 
+#+BEGIN_more
+#+END_more
+
 I should note that Gandi has not one but two DNS platforms. This post is
 written for their new LiveDNS platform and will NOT work if your domain
 is still using their old DNS platform. Also I'm using OpenWrt 18.06.1,

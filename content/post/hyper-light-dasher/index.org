@@ -23,6 +23,9 @@ version, many players have decided to simply cheese the game by abusing
 the keyboard controls or even using a program to automate the entire
 feat. Doing this on the Switch is a bit trickier, though.
 
+#+BEGIN_more
+#+END_more
+
 Luckily I remembered encountering
 [[https://medium.com/@bertrandom/automating-zelda-3b37127e24c8][this
 blog post]] in which Bertrand Fan managed to write a program to win
