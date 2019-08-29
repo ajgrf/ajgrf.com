@@ -127,6 +127,21 @@ STYLE is the style of the sitemap. PROJECT is the current project."
                           preview-text entry)
                 (format "%s" preview-text))))))
 
+(defun ajgrf/entry-with-date (entry style project)
+  "Default format for site map ENTRY, as a string.
+ENTRY is a file name.  STYLE is the style of the sitemap.
+PROJECT is the current project."
+  (cond ((not (directory-name-p entry))
+	 (format "%s [[file:%s][%s]]"
+                 (format-time-string "%Y-%m-%d"
+                                     (org-publish-find-date entry project))
+		 entry
+		 (org-publish-find-title entry project)))
+	((eq style 'tree)
+	 ;; Return only last subdir.
+	 (file-name-nondirectory (directory-file-name entry)))
+	(t entry)))
+
 (setq org-publish-project-alist
       `(("site-home"
          :base-directory "./content"
@@ -149,6 +164,7 @@ STYLE is the style of the sitemap. PROJECT is the current project."
          :auto-sitemap t
          :sitemap-title "Archives"
          :sitemap-filename "index.org"
+         :sitemap-format-entry ajgrf/entry-with-date
          :sitemap-style list
          :sitemap-sort-files anti-chronologically)
         ("site-other"
