@@ -76,12 +76,13 @@
 </footer>
 ")))
 
-(defun loomcom/get-preview (filename)
-  "Returns a list: '(<needs-more> <preview-string>) where
+(defun ajgrf/get-preview (filename)
+  "Return preview text for FILENAME.
+Returns a list: '(<needs-more> <preview-string>) where
 <needs-more> is t or nil, indicating whether a \"Read More...\"
 link is needed."
   (with-temp-buffer
-    (insert-file-contents (concat loomcom/project-dir "blog/" filename))
+    (insert-file-contents (concat "./content/" filename))
     (goto-char (point-min))
     (let ((content-start (or
                           ;; Look for the first non-keyword line
@@ -98,35 +99,31 @@ link is needed."
       (list (not (= marker (buffer-size)))
             (buffer-substring content-start marker)))))
 
-(defun loomcom/sitemap (title list)
-  "Generate the sitemap (Blog Main Page)"
-  (concat "#+TITLE: " title "\n" "--------\n"
-          (string-join (mapcar #'car (cdr list)) "\n\n")))
+(defun ajgrf/preview-posts-sitemap (title list)
+  "Sitemap function to display preview of posts.
+TITLE is ignored.  LIST is a representation of the entries."
+  (concat "#+TITLE: " title "\n\n"
+          (string-join (mapcar #'car (cdr list)) "--------\n")))
 
-(defun loomcom/sitemap-entry (entry style project)
-  "Sitemap (Blog Main Page) Entry Formatter"
+(defun ajgrf/sitemap-entry (entry style project)
+  "Format site map ENTRY with preview text.
+STYLE is the style of the sitemap. PROJECT is the current project."
   (when (not (directory-name-p entry))
-    (format (string-join
-             '("* [[file:%s][%s]]\n"
-               "#+BEGIN_published\n"
-               "%s\n"
-               "#+END_published\n\n"
-               "%s\n"
-               "--------\n"))
+    (format (concat "#+BEGIN_date\n%s\n#+END_date\n\n"
+                    "* [[file:%s][%s]]\n\n"
+                    "%s")
+            (format-time-string "%Y-%m-%d" (org-publish-find-date entry project))
             entry
             (org-publish-find-title entry project)
-            (format-time-string "%A, %B %_d %Y at %l:%M %p %Z" (org-publish-find-date entry project))
-            (let* ((preview (loomcom/get-preview entry))
+            (let* ((preview (ajgrf/get-preview entry))
                    (needs-more (car preview))
                    (preview-text (cadr preview)))
               (if needs-more
-                  (format
-                   (concat
-                    "%s\n\n"
-                    "#+BEGIN_morelink\n"
-                    "[[file:%s][Read More...]]\n"
-                    "#+END_morelink\n")
-                   preview-text entry)
+                  (format (concat "%s\n\n"
+                                  "#+BEGIN_morelink\n"
+                                  "[[file:%s][Read More...]]\n"
+                                  "#+END_morelink\n")
+                          preview-text entry)
                 (format "%s" preview-text))))))
 
 (defun ajgrf/newest-entry-on-home-sitemap (title list)
@@ -135,7 +132,7 @@ TITLE is ignored.  LIST is a representation of the entries."
   (let* ((newest (caadr list))
          (link   (car (org-element-parse-secondary-string newest '(link))))
          (path   (org-element-property :path link)))
-    (copy-file (concat "./content/post/" path)
+    (copy-file (concat "./content/" path)
                "./content/index.org"
                t)))
 
