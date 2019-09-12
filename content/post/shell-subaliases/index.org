@@ -17,6 +17,7 @@ command your shell executes and =status= is the subcommand interpreted
 by Git. Git also provides an alias feature very much like shell aliases.
 The command =git config --global alias.st status= defines an alias =st=
 for the =status= subcommand, so that you only need to type =git st=.
+What if you could define new subcommands like that anywhere you wanted?
 
 #+BEGIN_more
 #+END_more
