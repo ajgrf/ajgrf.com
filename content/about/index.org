@@ -1,33 +1,28 @@
 #+TITLE: About
 #+AUTHOR: Alex Griffin
-#+DATE: <2016-10-20 Thu 12:00>
 
-Hi, my name is Alex. I'm a self-taught programmer and open source
-enthusiast. I recently graduated with a BA in Linguistics from the
-University of Minnesota-Twin Cities.
-
-** Technologies
-
-- Linux (Debian, Red Hat/CentOS, GuixSD, and others)
-- Go
-- Shell scripting (sh, sed, awk)
-- Python
-- Web (HTML, CSS, JavaScript, JSON)
-- Functional programming (Haskell, Scheme)
-- Version control (git, hg, svn, cvs)
-- Networking & Monitoring (Nagios, TCP/IP, HTTP)
+Hello, I'm Alex. I like programming, hockey, and brevity.
+If you'd like to get in touch, you can reach me through
+[[mailto:Alex%20Griffin%20%3Ca%40ajgrf.com%3E][email]].
 
 ** Open Source
 
 - GitHub Profile: [[https://github.com/ajgrf][@ajgrf]]
 - GitLab Profile: [[https://gitlab.com/ajgrf][@ajgrf]]
-- [[https://git.savannah.gnu.org/cgit/guix.git/log/?qt=author&q=Alex+Griffin][Guix
-  Contributions]]
-
-** Contact Info
-
-If you would like to get in touch, you can reach me at:
-
-- Email: [[mailto:Alex%20Griffin%20%3Ca%40ajgrf.com%3E][a@ajgrf.com]]
-- PGP Key: [[../public_key.asc][2A39 3FFF 68F4 EF7A 3D29 12AF 6F51 20A0
+- PGP: [[../public_key.asc][2A39 3FFF 68F4 EF7A 3D29 12AF 6F51 20A0
   22FB B2D5]]
+
+** Technologies
+
+This website was crafted with [[https://www.gnu.org/software/emacs/][Emacs]]
+and [[https://orgmode.org/manual/Publishing.html][Org-publish]]. You can find
+the source [[https://gitlab.com/ajgrf/ajgrf.com][here]]. Some other
+technologies I know include:
+
+- Web Technologies (HTML, CSS, JavaScript, JSON)
+- Linux (Debian, Red Hat/CentOS, GuixSD, and others)
+- Shell scripting (sh, sed, awk)
+- Go
+- Python
+- Version control (git, hg, svn, cvs)
+- Networking & Monitoring (Nagios, TCP/IP, HTTP)
