@@ -1,71 +1,3 @@
-:root {
-    --background: #fdfdfd;
-    --foreground: #222222;
-    --border-color: #ccccc5;
-    --header-color: #222222;
-    --link-color: #004488;
-    --link-visited-color: #4d6495;
-    --nav-background: #eeeeea;
-
-    --code-serif-font: "Go Mono";
-    --code-inline: #000000;
-    --code-fg: #000000;
-    --code-bg: #ffffea;
-    --code-border-color: #ccccbb;
-    --code-builtin: #000000;
-    --code-comment: #663311;
-    --code-function-name: #000000;
-    --code-keyword: #000000;
-    --code-selection: #eeee9e;
-    --code-string: #005500;
-    --code-type: #000000;
-    --code-variable: #000000;
-}
-
-@media screen and (prefers-color-scheme: dark) {
-    :root {
-        --background: #1d2021;
-        --foreground: #ebdbb2;
-        --border-color: #3c3836;
-        --header-color: #fbf1c7;
-        --link-color: #83a598;
-        --link-visited-color: #d3869b;
-        --nav-background: #282828;
-
-        --code-serif-font: "";
-        --code-inline: #8ec07c;
-        --code-fg: #ebdbb2;
-        --code-bg: #282828;
-        --code-border-color: #665c54;
-        --code-builtin: #fe8019;
-        --code-comment: #7c6f64;
-        --code-function-name: #fabd2f;
-        --code-keyword: #fb4933;
-        --code-selection: #504945;
-        --code-string: #b8bb26;
-        --code-type: #d3869b;
-        --code-variable: #83a598;
-    }
-}
-
-@media print {
-    #preamble {
-        display: none !important;
-    }
-
-    :root {
-        --foreground: #000000;
-        --border-color: #cccccc;
-        --header-color: #000000;
-        --link-color: #000000;
-        --link-visited-color: #000000;
-
-        --code-border-color: #cccccc;
-        --code-comment: #000000;
-        --code-string: #000000;
-    }
-}
-
 html {
     font-size: 18px;
 }
@@ -77,9 +9,6 @@ body {
     line-height: 1.6;
     margin: 0;
     text-align: justify;
-
-    background-color: var(--background);
-    color: var(--foreground);
 }
 
 .container, #content {
@@ -97,24 +26,17 @@ nav, footer, h1, h2, h3, h4, h5, h6, .date {
     font-family: "Source Serif Pro", "Apple Garamond", "Baskerville", "Noto Serif", "Times New Roman", Times, serif;
     font-weight: 400;
     text-align: left;
-
-    color: var(--header-color);
 }
 
 nav {
     background-color: #eeeeea;
     border-bottom: 1px solid #ccccc5;
     padding: 0.5em 0;
-
-    background-color: var(--nav-background);
-    border-bottom: 1px solid var(--border-color);
 }
 
 nav a, nav a:visited {
     color: #222222;
     text-decoration: none;
-
-    color: var(--header-color);
 }
 
 .brand {
@@ -135,8 +57,6 @@ footer {
     border-top: 1px solid #ccccc5;
     font-size: 0.8em;
     margin-top: 1.5em;
-
-    border-top: 1px solid var(--border-color);
 }
 
 .date:not(:empty) {
@@ -146,33 +66,25 @@ footer {
 
 a {
     color: #004488;
-
-    color: var(--link-color);
 }
 
 a:visited {
     color: #4d6495;
-
-    color: var(--link-visited-color);
 }
 
 hr {
     height: 1px;
     background-color: #ccccc5;
     border: none;
-
-    background-color: var(--border-color);
 }
 
 code, .src {
-    font-family: var(--code-serif-font), PragmataPro, Iosevka, "Source Code Pro", Menlo, "Noto Mono", "DejaVu Sans Mono", "Liberation Mono", Consolas, "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace;
+    font-family: "Go Mono", PragmataPro, Iosevka, "Source Code Pro", Menlo, "Noto Mono", "DejaVu Sans Mono", "Liberation Mono", Consolas, "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace;
     font-size: 0.8em;
 }
 
 code {
     color: #000000;
-
-    color: var(--code-inline);
 }
 
 .src {
@@ -181,57 +93,169 @@ code {
     color: #000000;
     overflow: auto;
     padding: 0.5em 1em;
-
-    background-color: var(--code-bg);
-    border: 1px solid var(--code-border-color);
-    color: var(--code-fg);
 }
 
 .src::selection, .src ::selection {
     background-color: #eeee9e;
-
-    background-color: var(--code-selection);
 }
 
 .org-string {
     color: #005500;
-
-    color: var(--code-string);
 }
 
 .org-comment, .org-comment-delimiter {
     color: #663311;
     font-style: italic;
-
-    color: var(--code-comment);
 }
 
 .org-builtin {
     color: #000000;
-
-    color: var(--code-builtin);
 }
 
 .org-function-name {
     color: #000000;
-
-    color: var(--code-function-name);
 }
 
 .org-keyword {
     color: #000000;
-
-    color: var(--code-keyword);
 }
 
 .org-type {
     color: #000000;
-
-    color: var(--code-type);
 }
 
 .org-variable-name {
     color: #000000;
+}
 
-    color: var(--code-variable);
+@media print {
+    #preamble {
+        display: none !important;
+    }
+
+    body {
+        color: #000000;
+    }
+
+    nav, footer, h1, h2, h3, h4, h5, h6, .date {
+        color: #000000;
+    }
+
+    nav {
+        border-bottom: 1px solid #cccccc;
+    }
+
+    nav a, nav a:visited {
+        color: #000000;
+    }
+
+    footer {
+        border-top: 1px solid #cccccc;
+    }
+
+    a {
+        color: #000000;
+    }
+
+    a:visited {
+        color: #000000;
+    }
+
+    hr {
+        background-color: #cccccc;
+    }
+
+    .src {
+        border: 1px solid #cccccc;
+    }
+
+    .org-string {
+        color: #000000;
+    }
+
+    .org-comment, .org-comment-delimiter {
+        color: #000000;
+    }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    body {
+        background-color: #1d2021;
+        color: #ebdbb2;
+    }
+
+    nav, footer, h1, h2, h3, h4, h5, h6, .date {
+        color: #fbf1c7;
+    }
+
+    nav {
+        background-color: #282828;
+        border-bottom: 1px solid #3c3836;
+    }
+
+    nav a, nav a:visited {
+        color: #fbf1c7;
+    }
+
+    footer {
+        border-top: 1px solid #3c3836;
+    }
+
+    a {
+        color: #83a598;
+    }
+
+    a:visited {
+        color: #d3869b;
+    }
+
+    hr {
+        background-color: #3c3836;
+    }
+
+    code, .src {
+        font-family: PragmataPro, Iosevka, "Source Code Pro", Menlo, "Noto Mono", "DejaVu Sans Mono", "Liberation Mono", Consolas, "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace;
+    }
+
+    code {
+        color: #8ec07c;
+    }
+
+    .src {
+        background-color: #282828;
+        border: 1px solid #665c54;
+        color: #ebdbb2;
+    }
+
+    .src::selection, .src ::selection {
+        background-color: #504945;
+    }
+
+    .org-string {
+        color: #b8bb26;
+    }
+
+    .org-comment, .org-comment-delimiter {
+        color: #7c6f64;
+    }
+
+    .org-builtin {
+        color: #fe8019;
+    }
+
+    .org-function-name {
+        color: #fabd2f;
+    }
+
+    .org-keyword {
+        color: #fb4933;
+    }
+
+    .org-type {
+        color: #d3869b;
+    }
+
+    .org-variable-name {
+        color: #83a598;
+    }
 }
