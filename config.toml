@@ -1,0 +1,4 @@
+baseURL = "https://ajgrf.com/"
+languageCode = "en-us"
+title = "Alex Griffin"
+pygmentsUseClasses = true

@@ -53,6 +53,10 @@ nav a, nav a:visited {
     margin-left: 1em;
 }
 
+li>p {
+    margin: 0;
+}
+
 footer {
     border-top: 1px solid #ccccc5;
     font-size: 0.8em;
@@ -80,17 +84,25 @@ hr {
 
 code, .src {
     font-family: "Go Mono", PragmataPro, Iosevka, "Source Code Pro", Menlo, "Noto Mono", "DejaVu Sans Mono", "Liberation Mono", Consolas, "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace;
-    font-size: 0.8em;
 }
 
 code {
     color: #000000;
 }
 
+p>code {
+    font-size: 0.8em;
+}
+
+pre {
+    margin: 0;
+}
+
 .src {
     background-color: #ffffea;
     border: 1px solid #ccccbb;
     color: #000000;
+    font-size: 0.8em;
     overflow: auto;
     padding: 0.5em 1em;
 }
@@ -99,33 +111,13 @@ code {
     background-color: #eeee9e;
 }
 
-.org-string {
+.chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl, .chroma .sd, .chroma .s2, .chroma .se, .chroma .sh, .chroma .si, .chroma .sx, .chroma .sr, .chroma .s1, .chroma .ss {
     color: #005500;
 }
 
-.org-comment, .org-comment-delimiter {
+.chroma .c, .chroma .ch, .chroma .cm, .chroma .cp, .chroma .cpf, .chroma .c1, .chroma .cs {
     color: #663311;
     font-style: italic;
-}
-
-.org-builtin {
-    color: #000000;
-}
-
-.org-function-name {
-    color: #000000;
-}
-
-.org-keyword {
-    color: #000000;
-}
-
-.org-type {
-    color: #000000;
-}
-
-.org-variable-name {
-    color: #000000;
 }
 
 @media print {
@@ -169,11 +161,11 @@ code {
         border: 1px solid #cccccc;
     }
 
-    .org-string {
+    .chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl, .chroma .sd, .chroma .s2, .chroma .se, .chroma .sh, .chroma .si, .chroma .sx, .chroma .sr, .chroma .s1, .chroma .ss {
         color: #000000;
     }
 
-    .org-comment, .org-comment-delimiter {
+    .chroma .c, .chroma .ch, .chroma .cm, .chroma .cp, .chroma .cpf, .chroma .c1, .chroma .cs {
         color: #000000;
     }
 }
@@ -214,48 +206,32 @@ code {
     }
 
     code, .src {
+        color: #ebdbb2;
         font-family: PragmataPro, Iosevka, "Source Code Pro", Menlo, "Noto Mono", "DejaVu Sans Mono", "Liberation Mono", Consolas, "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace;
     }
 
-    code {
+    p>code {
         color: #8ec07c;
     }
 
     .src {
         background-color: #282828;
         border: 1px solid #665c54;
-        color: #ebdbb2;
     }
 
     .src::selection, .src ::selection {
         background-color: #504945;
     }
 
-    .org-string {
+    .chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl, .chroma .sd, .chroma .s2, .chroma .se, .chroma .sh, .chroma .si, .chroma .sx, .chroma .sr, .chroma .s1, .chroma .ss {
         color: #b8bb26;
     }
 
-    .org-comment, .org-comment-delimiter {
+    .chroma .c, .chroma .ch, .chroma .cm, .chroma .cp, .chroma .cpf, .chroma .c1, .chroma .cs {
         color: #7c6f64;
     }
 
-    .org-builtin {
-        color: #fe8019;
-    }
-
-    .org-function-name {
-        color: #fabd2f;
-    }
-
-    .org-keyword {
-        color: #fb4933;
-    }
-
-    .org-type {
-        color: #d3869b;
-    }
-
-    .org-variable-name {
+    .chroma .nv {
         color: #83a598;
     }
 }

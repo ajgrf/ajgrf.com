@@ -1,0 +1,9 @@
+{{ define "main" }}
+{{ if .Date }}
+<div class="date">
+  <p>{{.Date.Format "2006-01-02"}}</p>
+</div>
+{{ end }}
+<h1 class="title">{{.Title}}</h1>
+{{ .Content }}
+{{ end }}

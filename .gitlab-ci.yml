@@ -1,20 +1,18 @@
-image: debian
+# All available Hugo versions are listed here: https://gitlab.com/pages/hugo/container_registry
+image: registry.gitlab.com/pages/hugo:latest
 
-before_script:
-  - apt-get update
-  - apt-get install -y emacs make
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
 
 test:
-  stage: test
   script:
-  - make build
+  - hugo
   except:
   - master
 
 pages:
-  stage: deploy
   script:
-  - make build
+  - hugo
   artifacts:
     paths:
     - public

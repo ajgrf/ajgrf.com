@@ -23,8 +23,7 @@ version, many players have decided to simply cheese the game by abusing
 the keyboard controls or even using a program to automate the entire
 feat. Doing this on the Switch is a bit trickier, though.
 
-#+BEGIN_more
-#+END_more
+# more
 
 Luckily I remembered encountering
 [[https://medium.com/@bertrandom/automating-zelda-3b37127e24c8][this
@@ -49,15 +48,15 @@ Getting the timing right was the trickiest part. Bertrand uses a little
 DSL to sequence his button presses that looks like this:
 
 #+BEGIN_SRC c
-  typedef struct {
-      Buttons_t button;
-      uint16_t duration;
-  } command;
+typedef struct {
+    Buttons_t button;
+    uint16_t duration;
+} command;
 
-  static const command step[] = {
-      { B,         5 },
-      { NOTHING, 150 },
-  };
+static const command step[] = {
+    { B,         5 },
+    { NOTHING, 150 },
+};
 #+END_SRC
 
 This will be interpreted as instructions to emit the B button for 5
@@ -66,5 +65,5 @@ duration? It turns out that they're simply the number of times the main
 loop should repeatedly report the same input to the console. Since the
 USB polling frequency is 8 ms, and each USB report is echoed 3 times
 (for reasons I don't really understand), then 5 units of duration is
-approximately equal to 5 * 8 * 3 \equal{}\equal{} 120 ms. Similarly, 150
-units is 150 * 8 * 3 \equal{}\equal{} 3600 ms, or about 3.6 seconds.
+approximately equal to 5 * 8 * 3 \equal\equal 120 ms. Similarly, 150
+units is 150 * 8 * 3 \equal\equal 3600 ms, or about 3.6 seconds.

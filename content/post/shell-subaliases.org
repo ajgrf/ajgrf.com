@@ -8,7 +8,7 @@ frequently-typed or long commands. For example, the following common
 alias lets you shorten =ls -la= to just =ll=:
 
 #+BEGIN_SRC sh
-  alias ll='ls -la'
+alias ll='ls -la'
 #+END_SRC
 
 Some commands, like =git=, provide hierarchical subcommands. To view the
@@ -19,10 +19,9 @@ The command =git config --global alias.st status= defines an alias =st=
 for the =status= subcommand, so that you only need to type =git st=.
 What if you could define new subcommands like that anywhere you wanted?
 
-#+BEGIN_more
-#+END_more
+# more
 
-** Wrapping Commands with Functions
+* Wrapping Commands with Functions
 
 Another popular command line tool that works using subcommands is =apt=.
 Unlike =git=, though, it does /not/ provide its own facility for
@@ -31,7 +30,7 @@ to view recent package installations, removals, and upgrades, you're out
 of luck. The closest you might get is defining an alias =apt-log=:
 
 #+BEGIN_src sh
-  alias apt-log='less /var/log/apt/history.log'
+alias apt-log='less /var/log/apt/history.log'
 #+END_SRC
 
 This works fine, but it's not really the same thing. Is there any way to
@@ -39,13 +38,13 @@ actually add it as a subcommand alias, or "subalias," without editing
 the source code? One possibility is writing a wrapper function:
 
 #+BEGIN_SRC sh
-  apt() {
-      if test "$1" = "log"; then
-          less /var/log/apt/history.log
-      else
-          command apt "$@"
-      fi
-  }
+apt() {
+    if test "$1" = "log"; then
+        less /var/log/apt/history.log
+    else
+        command apt "$@"
+    fi
+}
 #+END_SRC
 
 Success! This shell function opens the apt log file if its first
@@ -54,38 +53,38 @@ command. However, this technique quickly gets tedious if you want to
 define many such subaliases. It would be much nicer to generate wrapper
 functions like this automatically.
 
-** The Subalias Function
+* The Subalias Function
 
 Using some shell magic, we can write a function to do this sort of
 wrapping for us.
 
 #+BEGIN_SRC sh
-  subalias() {
-      local cmd body name
+subalias() {
+    local cmd body name
 
-      name="${1%%=*}"
-      cmd="${name%_*}"
-      body="${1#*=}"
+    name="${1%%=*}"
+    cmd="${name%_*}"
+    body="${1#*=}"
 
-      eval "$cmd"'() {
-          local cmd='"$cmd"' subcmd="$1"
-          if type "${cmd}_${subcmd}" >/dev/null 2>&1; then
-              shift
-              "${cmd}_${subcmd}" "$@"
-          elif type "${cmd}_${subcmd}_subalias" >/dev/null 2>&1; then
-              shift
-              "${cmd}_${subcmd}_subalias" "$@"
-          elif type "${cmd}_subalias" >/dev/null 2>&1; then
-              "${cmd}_subalias" "$@"
-          else
-              command "$cmd" "$@"
-          fi
-      }'
+    eval "$cmd"'() {
+        local cmd='"$cmd"' subcmd="$1"
+        if type "${cmd}_${subcmd}" >/dev/null 2>&1; then
+            shift
+            "${cmd}_${subcmd}" "$@"
+        elif type "${cmd}_${subcmd}_subalias" >/dev/null 2>&1; then
+            shift
+            "${cmd}_${subcmd}_subalias" "$@"
+        elif type "${cmd}_subalias" >/dev/null 2>&1; then
+            "${cmd}_subalias" "$@"
+        else
+            command "$cmd" "$@"
+        fi
+    }'
 
-      if test "$body" != "$1"; then
-          eval "${name}_subalias"'() { '"$body"'; }'
-      fi
-  }
+    if test "$body" != "$1"; then
+        eval "${name}_subalias"'() { '"$body"'; }'
+    fi
+}
 #+END_SRC
 
 Now you can just write
@@ -98,10 +97,10 @@ What else can we do with this? Try implicitly invoking =sudo= only when
 it's required:
 
 #+BEGIN_SRC sh
-  for action in install reinstall remove purge autoremove update upgrade \
-      full-upgrade edit-sources; do
-      subalias apt_${action}='sudo apt '"${action}"' "$@"'
-  done
+for action in install reinstall remove purge autoremove update upgrade \
+    full-upgrade edit-sources; do
+    subalias apt_${action}='sudo apt '"${action}"' "$@"'
+done
 #+END_SRC
 
 Now running =apt install hello= will automatically invoke =sudo=, but
@@ -115,15 +114,15 @@ previous subalias.)
 OK, what about sub-subaliases? We can do that too!
 
 #+BEGIN_SRC sh
-  subalias apt_show='command apt show "$@"'
-  subalias apt_show_vim='apt show emacs'
+subalias apt_show='command apt show "$@"'
+subalias apt_show_vim='apt show emacs'
 #+END_SRC
 
 Since everybody knows that Emacs is better than vim, now whenever you
 type =apt show vim= you will be directed to Emacs instead. Typing any
 other package name will dispatch to the real =apt show= like normal.
 
-** Conclusion
+* Conclusion
 
 This kind of code is a lot of fun to play with, but it's also very
 brittle! You should definitely avoid using these techniques in

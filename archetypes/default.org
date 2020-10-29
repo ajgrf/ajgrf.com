@@ -1,0 +1,5 @@
+#+TITLE: {{ replace .Name "-" " " | title }}
+#+AUTHOR: Alex Griffin
+#+DATE: {{ .Date }}
+#+DRAFT: true
+

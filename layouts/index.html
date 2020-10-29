@@ -1,0 +1,17 @@
+{{ define "main" }}
+{{ with .GetPage "/post" }}
+{{ $list := .Pages }}
+{{ $len := len $list }}
+{{ range $index, $elem := $list }}
+<div class="date">
+  <p>{{.Date.Format "2006-01-02"}}</p>
+</div>
+<h2><a href="{{.RelPermalink}}">{{.Title}}</a></h2>
+{{.Summary}}
+<div class="morelink">
+  <p><a href="{{.RelPermalink}}">Read More&#x2026;</a>
+</div>
+{{ if lt (add $index 1) $len }}<hr>{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
