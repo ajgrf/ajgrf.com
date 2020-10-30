@@ -1,0 +1,33 @@
+<!doctype html><html lang=en><head><meta name=generator content="Hugo 0.74.3"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Alex Griffin</title><link rel=stylesheet href=/style.css><link rel=alternate type=application/rss+xml href=/post/index.xml title="Alex Griffin"><link rel=icon type=image/x-icon href=/favicon.ico></head><body><div id=preamble class=status><nav><div class="container split"><a class=brand href=/>Alex Griffin</a>
+<span><a class=nav-link href=/about/>About</a>
+<a class=nav-link href=/post/>Archives</a></span></div></nav></div><div id=content><div class=date><p>2019-06-11</p></div><h2><a href=/post/shell-subaliases/>Defining Shell Aliases for Subcommands</a></h2><p>If you spend any time using the command line, you're probably familiar
+with aliases. The idea is to substitute a short and easy name for
+frequently-typed or long commands. For example, the following common
+alias lets you shorten <code class=verbatim>ls -la</code> to just <code class=verbatim>ll</code>:</p><div class="src src-sh"><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=nb>alias</span> <span class=nv>ll</span><span class=o>=</span><span class=s1>&#39;ls -la&#39;</span></code></pre></div></div><p>Some commands, like <code class=verbatim>git</code>, provide hierarchical subcommands. To view the
+status of a git repository, you run <code class=verbatim>git status</code>, where <code class=verbatim>git</code> is the
+command your shell executes and <code class=verbatim>status</code> is the subcommand interpreted
+by Git. Git also provides an alias feature very much like shell aliases.
+The command <code class=verbatim>git config --global alias.st status</code> defines an alias <code class=verbatim>st</code>
+for the <code class=verbatim>status</code> subcommand, so that you only need to type <code class=verbatim>git st</code>.
+What if you could define new subcommands like that anywhere you wanted?</p><div class=morelink><p><a href=/post/shell-subaliases/>Read More&#8230;</a></div><hr><div class=date><p>2018-10-04</p></div><h2><a href=/post/hyper-light-dasher/>Automating Hyper Light Drifter's 800 Dash Challenge on the Nintendo Switch</a></h2><p>I do all of my gaming these days on a Nintendo Switch (with the
+exception of <a href=http://www.zachtronics.com/>Zachtronics</a> games on my
+Linux machine). Lately I've been playing
+<a href=https://heartmachine.com/hyper-light>Hyper Light Drifter</a>, a gorgeous
+retro-styled action adventure game that its creator calls a mix of 2D
+Zelda and Diablo. The game is challenging, but plays nearly perfectly.
+Except…</p><p>There is one optional challenge which calls for you to dash 800 times
+consecutively in a confined space. This requires you to button mash with
+precise timing while directing the character in a circle to avoid
+bumping into any walls. It's brutal, and
+<a href=https://old.reddit.com/r/hyperlightdrifter/>discussion spaces</a> related to
+the game are filled with stories and complaints about this challenge.</p><p>After many failed attempts and probably tens of thousands of button
+mashes later, I decided there was probably a better way. On the PC
+version, many players have decided to simply cheese the game by abusing
+the keyboard controls or even using a program to automate the entire
+feat. Doing this on the Switch is a bit trickier, though.</p><div class=morelink><p><a href=/post/hyper-light-dasher/>Read More&#8230;</a></div><hr><div class=date><p>2018-09-19</p></div><h2><a href=/post/openwrt-ddns-gandi/>How to Set Up Dynamic DNS with OpenWrt and Gandi LiveDNS</a></h2><p><a href=https://openwrt.org/>OpenWrt</a> supports quite a few dynamic DNS
+providers in its very nice ddns-scripts package. Many of them are free,
+but if you already pay for a domain name and DNS hosting at
+<a href=https://www.gandi.net/en>Gandi.net</a> why not just use that?
+Unfortunately Gandi is not a supported provider, but it's fairly
+straightforward to get it working with a custom update script.</p><div class=morelink><p><a href=/post/openwrt-ddns-gandi/>Read More&#8230;</a></div></div><div id=postamble class=status><footer><div class=container>&copy; 2020 Alex Griffin. Unless otherwise noted, licensed under the
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>CC BY-SA 4.0</a>.</div></footer></div></body></html>

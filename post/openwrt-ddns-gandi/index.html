@@ -1,0 +1,74 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>How to Set Up Dynamic DNS with OpenWrt and Gandi LiveDNS</title><link rel=stylesheet href=/style.css><link rel=alternate type=application/rss+xml href=/post/index.xml title="Alex Griffin"><link rel=icon type=image/x-icon href=/favicon.ico></head><body><div id=preamble class=status><nav><div class="container split"><a class=brand href=/>Alex Griffin</a>
+<span><a class=nav-link href=/about/>About</a>
+<a class=nav-link href=/post/>Archives</a></span></div></nav></div><div id=content><div class=date><p>2018-09-19</p></div><h1 class=title>How to Set Up Dynamic DNS with OpenWrt and Gandi LiveDNS</h1><p><a href=https://openwrt.org/>OpenWrt</a> supports quite a few dynamic DNS
+providers in its very nice ddns-scripts package. Many of them are free,
+but if you already pay for a domain name and DNS hosting at
+<a href=https://www.gandi.net/en>Gandi.net</a> why not just use that?
+Unfortunately Gandi is not a supported provider, but it's fairly
+straightforward to get it working with a custom update script.</p><p>I should note that Gandi has not one but two DNS platforms. This post is
+written for their new LiveDNS platform and will NOT work if your domain
+is still using their old DNS platform. Also I'm using OpenWrt 18.06.1,
+the latest release as of the writing of this post. Finally, this is a
+very technical article, and assumes you are already familiar with every
+step involved in setting up dynamic DNS on OpenWrt except for how to get
+it working with Gandi.</p><p>First, log in to your OpenWrt router and install the prerequisite
+packages:</p><div class="src src-sh"><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh>root@OpenWrt:~# opkg update
+root@OpenWrt:~# opkg install curl ddns-scripts luci-app-ddns</code></pre></div></div><p>Gandi LiveDNS sports a <a href=https://doc.livedns.gandi.net/>RESTful HTTP
+API</a> that we'll be using to make our DNS updates. So copy the custom
+update script below to <code class=verbatim>/etc/ddns/update_gandi_net.sh</code>:</p><div class="src src-sh"><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=cp>#!/bin/sh
+</span><span class=cp></span>
+<span class=nb>local</span> <span class=nv>__TTL</span><span class=o>=</span><span class=m>600</span>
+<span class=nb>local</span> __RRTYPE
+<span class=nb>local</span> <span class=nv>__ENDPOINT</span><span class=o>=</span><span class=s2>&#34;https://dns.api.gandi.net/api/v5&#34;</span>
+
+<span class=o>[</span> -z <span class=s2>&#34;</span><span class=nv>$username</span><span class=s2>&#34;</span> <span class=o>]</span> <span class=o>&amp;&amp;</span> write_log <span class=m>14</span> <span class=s2>&#34;Service section not configured correctly! Missing subdomain as &#39;username&#39;&#34;</span>
+<span class=o>[</span> -z <span class=s2>&#34;</span><span class=nv>$password</span><span class=s2>&#34;</span> <span class=o>]</span> <span class=o>&amp;&amp;</span> write_log <span class=m>14</span> <span class=s2>&#34;Service section not configured correctly! Missing API Key as &#39;password&#39;&#34;</span>
+
+<span class=o>[</span> <span class=nv>$use_ipv6</span> -ne <span class=m>0</span> <span class=o>]</span> <span class=o>&amp;&amp;</span> <span class=nv>__RRTYPE</span><span class=o>=</span><span class=s2>&#34;AAAA&#34;</span> <span class=o>||</span> <span class=nv>__RRTYPE</span><span class=o>=</span><span class=s2>&#34;A&#34;</span>
+
+curl -s -X PUT <span class=s2>&#34;</span><span class=nv>$__ENDPOINT</span><span class=s2>/domains/</span><span class=nv>$domain</span><span class=s2>/records/</span><span class=nv>$username</span><span class=s2>/</span><span class=nv>$__RRTYPE</span><span class=s2>&#34;</span> <span class=se>\
+</span><span class=se></span>    -H <span class=s2>&#34;X-Api-Key: </span><span class=nv>$password</span><span class=s2>&#34;</span> <span class=se>\
+</span><span class=se></span>    -H <span class=s2>&#34;Content-Type: application/json&#34;</span> <span class=se>\
+</span><span class=se></span>    -d <span class=s2>&#34;{\&#34;rrset_ttl\&#34;: </span><span class=nv>$__TTL</span><span class=s2>, \&#34;rrset_values\&#34;: [\&#34;</span><span class=nv>$__IP</span><span class=s2>\&#34;]}&#34;</span> &gt;<span class=nv>$DATFILE</span>
+
+write_log <span class=m>7</span> <span class=s2>&#34;gandi.net answered: </span><span class=k>$(</span>cat <span class=nv>$DATFILE</span><span class=k>)</span><span class=s2>&#34;</span>
+
+<span class=k>return</span> <span class=m>0</span></code></pre></div></div><p>Make it executable and add it to <code class=verbatim>sysupgrade.conf</code> so that it persists
+after system upgrades.</p><div class="src src-sh"><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh>root@OpenWrt:~# chmod +x /etc/ddns/update_gandi_net.sh
+root@OpenWrt:~# <span class=nb>echo</span> /etc/ddns/update_gandi_net.sh &gt;&gt;/etc/sysupgrade.conf</code></pre></div></div><p>OpenWrt's ddns service handles all the logic of scheduling updates and
+getting our current IP address. The seemingly unset variables above
+(<code class=verbatim>$username</code>, <code class=verbatim>$password</code>, <code class=verbatim>$domain</code>, <code class=verbatim>$__IP</code> etc.) will be set by ddns
+once everything else is configured.</p><p>Now you can configure ddns (almost) like you normally would, either
+from the luci web interface or with
+<a href=https://openwrt.org/docs/guide-user/base-system/uci>UCI</a> on the
+console. Though the meaning of some of the configuration variables is
+probably not obvious unless you read the script above very closely.</p><p>You want to select a custom script as the ddns provider and set it to
+<code class=verbatim>/etc/ddns/update_gandi_net.sh</code>. The domain should be the name of the
+domain you registered with Gandi, and shouldn't include any subdomains.
+The username should actually be set to the subdomain you want to update.
+The password should be your LiveDNS API Key rather than your Gandi
+password. You can retrieve it in the security section of your Gandi
+<a href=https://account.gandi.net/>account admin panel</a>.</p><p>A complete <code class=verbatim>/etc/config/ddns</code> might look like this:</p><div class="src src-conf"><pre><code class=language-conf data-lang=conf>config ddns &#39;global&#39;
+    option ddns_dateformat &#39;%F %R&#39;
+    option ddns_loglines &#39;250&#39;
+    option upd_privateip &#39;0&#39;
+
+config service &#39;gandi_ipv4&#39;
+    option lookup_host &#39;subdomain.example.com&#39;
+    option update_script &#39;/etc/ddns/update_gandi_net.sh&#39;
+    option domain &#39;example.com&#39;
+    option username &#39;subdomain&#39;
+    option password &#39;your-apikey&#39;
+    option dns_server &#39;ns-98-a.gandi.net&#39;
+    option enabled &#39;1&#39;
+
+config service &#39;gandi_ipv6&#39;
+    option lookup_host &#39;subdomain.example.com&#39;
+    option use_ipv6 &#39;1&#39;
+    option update_script &#39;/etc/ddns/update_gandi_net.sh&#39;
+    option domain &#39;example.com&#39;
+    option username &#39;subdomain&#39;
+    option password &#39;your-apikey&#39;
+    option dns_server &#39;ns-98-a.gandi.net&#39;
+    option enabled &#39;1&#39;</code></pre></div></div><div id=postamble class=status><footer><div class=container>&copy; 2020 Alex Griffin. Unless otherwise noted, licensed under the
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>CC BY-SA 4.0</a>.</div></footer></div></body></html>

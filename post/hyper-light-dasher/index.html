@@ -1,0 +1,50 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Automating Hyper Light Drifter's 800 Dash Challenge on the Nintendo Switch</title><link rel=stylesheet href=/style.css><link rel=alternate type=application/rss+xml href=/post/index.xml title="Alex Griffin"><link rel=icon type=image/x-icon href=/favicon.ico></head><body><div id=preamble class=status><nav><div class="container split"><a class=brand href=/>Alex Griffin</a>
+<span><a class=nav-link href=/about/>About</a>
+<a class=nav-link href=/post/>Archives</a></span></div></nav></div><div id=content><div class=date><p>2018-10-04</p></div><h1 class=title>Automating Hyper Light Drifter's 800 Dash Challenge on the Nintendo Switch</h1><p>I do all of my gaming these days on a Nintendo Switch (with the
+exception of <a href=http://www.zachtronics.com/>Zachtronics</a> games on my
+Linux machine). Lately I've been playing
+<a href=https://heartmachine.com/hyper-light>Hyper Light Drifter</a>, a gorgeous
+retro-styled action adventure game that its creator calls a mix of 2D
+Zelda and Diablo. The game is challenging, but plays nearly perfectly.
+Except…</p><p>There is one optional challenge which calls for you to dash 800 times
+consecutively in a confined space. This requires you to button mash with
+precise timing while directing the character in a circle to avoid
+bumping into any walls. It's brutal, and
+<a href=https://old.reddit.com/r/hyperlightdrifter/>discussion spaces</a> related to
+the game are filled with stories and complaints about this challenge.</p><p>After many failed attempts and probably tens of thousands of button
+mashes later, I decided there was probably a better way. On the PC
+version, many players have decided to simply cheese the game by abusing
+the keyboard controls or even using a program to automate the entire
+feat. Doing this on the Switch is a bit trickier, though.</p><p>Luckily I remembered encountering
+<a href=https://medium.com/@bertrandom/automating-zelda-3b37127e24c8>this
+blog post</a> in which Bertrand Fan managed to write a program to win
+rupees in Zelda for him. Building on the earlier work of
+<a href=https://github.com/dekuNukem/Nintendo_Switch_Reverse_Engineering>dekuNukem</a>
+and <a href=https://github.com/progmem/Switch-Fightstick>Jason DeLeon</a> to
+reverse engineer parts of the Nintendo Switch, an inexpensive
+<a href=https://www.pjrc.com/store/teensypp.html>USB development board</a> can
+be made to emulate a Switch-compatible controller. With that hard work
+out of the way, programming it to emit pre-determined sequences of
+button presses is relatively simple.</p><p>Making the minimal necessary number of changes to the code, I was able
+to adapt Bertrand's Zelda script to complete the dash challenge for me.
+The <a href=https://github.com/ajgrf/hyper-light-dasher>resulting code</a> is
+pretty ugly (there's no good reason why dashing 800 times should require
+800 lines of code), but considering it's only meant to be run once I
+have no reason to improve it.</p><p>Getting the timing right was the trickiest part. Bertrand uses a little
+DSL to sequence his button presses that looks like this:</p><div class="src src-c"><div class=highlight><pre class=chroma><code class=language-c data-lang=c><span class=k>typedef</span> <span class=k>struct</span> <span class=p>{</span>
+    <span class=n>Buttons_t</span> <span class=n>button</span><span class=p>;</span>
+    <span class=n>uint16_t</span> <span class=n>duration</span><span class=p>;</span>
+<span class=p>}</span> <span class=n>command</span><span class=p>;</span>
+
+<span class=k>static</span> <span class=k>const</span> <span class=n>command</span> <span class=n>step</span><span class=p>[]</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=p>{</span> <span class=n>B</span><span class=p>,</span>         <span class=mi>5</span> <span class=p>},</span>
+    <span class=p>{</span> <span class=n>NOTHING</span><span class=p>,</span> <span class=mi>150</span> <span class=p>},</span>
+<span class=p>};</span></code></pre></div></div><p>This will be interpreted as instructions to emit the B button for 5
+units, followed by a pause for 150 units. But what are the units of
+duration? It turns out that they're simply the number of times the main
+loop should repeatedly report the same input to the console. Since the
+USB polling frequency is 8 ms, and each USB report is echoed 3 times
+(for reasons I don't really understand), then 5 units of duration is
+approximately equal to 5 * 8 * 3 == 120 ms. Similarly, 150
+units is 150 * 8 * 3 == 3600 ms, or about 3.6 seconds.</p></div><div id=postamble class=status><footer><div class=container>&copy; 2020 Alex Griffin. Unless otherwise noted, licensed under the
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>CC BY-SA 4.0</a>.</div></footer></div></body></html>

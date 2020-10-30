@@ -1,0 +1,78 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Defining Shell Aliases for Subcommands</title><link rel=stylesheet href=/style.css><link rel=alternate type=application/rss+xml href=/post/index.xml title="Alex Griffin"><link rel=icon type=image/x-icon href=/favicon.ico></head><body><div id=preamble class=status><nav><div class="container split"><a class=brand href=/>Alex Griffin</a>
+<span><a class=nav-link href=/about/>About</a>
+<a class=nav-link href=/post/>Archives</a></span></div></nav></div><div id=content><div class=date><p>2019-06-11</p></div><h1 class=title>Defining Shell Aliases for Subcommands</h1><p>If you spend any time using the command line, you're probably familiar
+with aliases. The idea is to substitute a short and easy name for
+frequently-typed or long commands. For example, the following common
+alias lets you shorten <code class=verbatim>ls -la</code> to just <code class=verbatim>ll</code>:</p><div class="src src-sh"><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=nb>alias</span> <span class=nv>ll</span><span class=o>=</span><span class=s1>&#39;ls -la&#39;</span></code></pre></div></div><p>Some commands, like <code class=verbatim>git</code>, provide hierarchical subcommands. To view the
+status of a git repository, you run <code class=verbatim>git status</code>, where <code class=verbatim>git</code> is the
+command your shell executes and <code class=verbatim>status</code> is the subcommand interpreted
+by Git. Git also provides an alias feature very much like shell aliases.
+The command <code class=verbatim>git config --global alias.st status</code> defines an alias <code class=verbatim>st</code>
+for the <code class=verbatim>status</code> subcommand, so that you only need to type <code class=verbatim>git st</code>.
+What if you could define new subcommands like that anywhere you wanted?</p><div id=outline-container-headline-1 class=outline-2><h2 id=headline-1>Wrapping Commands with Functions</h2><div id=outline-text-headline-1 class=outline-text-2><p>Another popular command line tool that works using subcommands is <code class=verbatim>apt</code>.
+Unlike <code class=verbatim>git</code>, though, it does <em>not</em> provide its own facility for
+subcommand aliases. For example, if you wanted to add a <code class=verbatim>log</code> subcommand
+to view recent package installations, removals, and upgrades, you're out
+of luck. The closest you might get is defining an alias <code class=verbatim>apt-log</code>:</p><div class="src src-sh"><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=nb>alias</span> apt-log<span class=o>=</span><span class=s1>&#39;less /var/log/apt/history.log&#39;</span></code></pre></div></div><p>This works fine, but it's not really the same thing. Is there any way to
+actually add it as a subcommand alias, or "subalias," without editing
+the source code? One possibility is writing a wrapper function:</p><div class="src src-sh"><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh>apt<span class=o>()</span> <span class=o>{</span>
+    <span class=k>if</span> <span class=nb>test</span> <span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span> <span class=o>=</span> <span class=s2>&#34;log&#34;</span><span class=p>;</span> <span class=k>then</span>
+        less /var/log/apt/history.log
+    <span class=k>else</span>
+        <span class=nb>command</span> apt <span class=s2>&#34;</span><span class=nv>$@</span><span class=s2>&#34;</span>
+    <span class=k>fi</span>
+<span class=o>}</span></code></pre></div></div><p>Success! This shell function opens the apt log file if its first
+argument is <code class=verbatim>log</code>; otherwise it passes its arguments to the real <code class=verbatim>apt</code>
+command. However, this technique quickly gets tedious if you want to
+define many such subaliases. It would be much nicer to generate wrapper
+functions like this automatically.</p></div></div><div id=outline-container-headline-2 class=outline-2><h2 id=headline-2>The Subalias Function</h2><div id=outline-text-headline-2 class=outline-text-2><p>Using some shell magic, we can write a function to do this sort of
+wrapping for us.</p><div class="src src-sh"><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh>subalias<span class=o>()</span> <span class=o>{</span>
+    <span class=nb>local</span> cmd body name
+
+    <span class=nv>name</span><span class=o>=</span><span class=s2>&#34;</span><span class=si>${</span><span class=nv>1</span><span class=p>%%=*</span><span class=si>}</span><span class=s2>&#34;</span>
+    <span class=nv>cmd</span><span class=o>=</span><span class=s2>&#34;</span><span class=si>${</span><span class=nv>name</span><span class=p>%_*</span><span class=si>}</span><span class=s2>&#34;</span>
+    <span class=nv>body</span><span class=o>=</span><span class=s2>&#34;</span><span class=si>${</span><span class=nv>1</span><span class=p>#*=</span><span class=si>}</span><span class=s2>&#34;</span>
+
+    <span class=nb>eval</span> <span class=s2>&#34;</span><span class=nv>$cmd</span><span class=s2>&#34;</span><span class=s1>&#39;() {
+</span><span class=s1>        local cmd=&#39;</span><span class=s2>&#34;</span><span class=nv>$cmd</span><span class=s2>&#34;</span><span class=s1>&#39; subcmd=&#34;$1&#34;
+</span><span class=s1>        if type &#34;${cmd}_${subcmd}&#34; &gt;/dev/null 2&gt;&amp;1; then
+</span><span class=s1>            shift
+</span><span class=s1>            &#34;${cmd}_${subcmd}&#34; &#34;$@&#34;
+</span><span class=s1>        elif type &#34;${cmd}_${subcmd}_subalias&#34; &gt;/dev/null 2&gt;&amp;1; then
+</span><span class=s1>            shift
+</span><span class=s1>            &#34;${cmd}_${subcmd}_subalias&#34; &#34;$@&#34;
+</span><span class=s1>        elif type &#34;${cmd}_subalias&#34; &gt;/dev/null 2&gt;&amp;1; then
+</span><span class=s1>            &#34;${cmd}_subalias&#34; &#34;$@&#34;
+</span><span class=s1>        else
+</span><span class=s1>            command &#34;$cmd&#34; &#34;$@&#34;
+</span><span class=s1>        fi
+</span><span class=s1>    }&#39;</span>
+
+    <span class=k>if</span> <span class=nb>test</span> <span class=s2>&#34;</span><span class=nv>$body</span><span class=s2>&#34;</span> !<span class=o>=</span> <span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span> <span class=k>then</span>
+        <span class=nb>eval</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>name</span><span class=si>}</span><span class=s2>_subalias&#34;</span><span class=s1>&#39;() { &#39;</span><span class=s2>&#34;</span><span class=nv>$body</span><span class=s2>&#34;</span><span class=s1>&#39;; }&#39;</span>
+    <span class=k>fi</span>
+<span class=o>}</span></code></pre></div></div><p>Now you can just write
+<code>subalias apt_log='less /var/log/apt/history.log'</code>. Two functions will
+be generated for you: <code class=verbatim>apt_log_subalias</code> to open the log file, and the
+<code class=verbatim>apt</code> wrapper function to dynamically dispatch based on the arguments
+passed to it.</p><p>What else can we do with this? Try implicitly invoking <code class=verbatim>sudo</code> only when
+it's required:</p><div class="src src-sh"><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=k>for</span> action in install reinstall remove purge autoremove update upgrade <span class=se>\
+</span><span class=se></span>    full-upgrade edit-sources<span class=p>;</span> <span class=k>do</span>
+    subalias apt_<span class=si>${</span><span class=nv>action</span><span class=si>}</span><span class=o>=</span><span class=s1>&#39;sudo apt &#39;</span><span class=s2>&#34;</span><span class=si>${</span><span class=nv>action</span><span class=si>}</span><span class=s2>&#34;</span><span class=s1>&#39; &#34;$@&#34;&#39;</span>
+<span class=k>done</span></code></pre></div></div><p>Now running <code class=verbatim>apt install hello</code> will automatically invoke <code class=verbatim>sudo</code>, but
+<code class=verbatim>apt show hello</code> will not. There are a couple interesting things to
+note. One is that, unlike normal aliases, we had to explicitly append
+arguments to the command by ending it with <code>"$@"</code>. Two is that we were
+able to run <code class=verbatim>subalias</code> multiple times to define multiple subaliases for
+<code class=verbatim>apt</code>. (The wrapper functions didn't clobber each other and erase the
+previous subalias.)</p><p>OK, what about sub-subaliases? We can do that too!</p><div class="src src-sh"><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh>subalias <span class=nv>apt_show</span><span class=o>=</span><span class=s1>&#39;command apt show &#34;$@&#34;&#39;</span>
+subalias <span class=nv>apt_show_vim</span><span class=o>=</span><span class=s1>&#39;apt show emacs&#39;</span></code></pre></div></div><p>Since everybody knows that Emacs is better than vim, now whenever you
+type <code class=verbatim>apt show vim</code> you will be directed to Emacs instead. Typing any
+other package name will dispatch to the real <code class=verbatim>apt show</code> like normal.</p></div></div><div id=outline-container-headline-3 class=outline-2><h2 id=headline-3>Conclusion</h2><div id=outline-text-headline-3 class=outline-text-2><p>This kind of code is a lot of fun to play with, but it's also very
+brittle! You should definitely avoid using these techniques in
+production, or to prank unsuspecting coworkers ;-). Defining a normal
+alias is always the simpler solution, but subaliases can still be handy
+for personal interactive usage. The Bourne shell is a truly malleable
+language that can be tailored to your preferences, if you can put up
+with its idiosyncrasies.</p></div></div></div><div id=postamble class=status><footer><div class=container>&copy; 2020 Alex Griffin. Unless otherwise noted, licensed under the
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>CC BY-SA 4.0</a>.</div></footer></div></body></html>

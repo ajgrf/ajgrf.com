@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alex Griffin</title><link>https://ajgrf.com/</link><description>Recent content on Alex Griffin</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 11 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://ajgrf.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Defining Shell Aliases for Subcommands</title><link>https://ajgrf.com/post/shell-subaliases/</link><pubDate>Tue, 11 Jun 2019 00:00:00 +0000</pubDate><guid>https://ajgrf.com/post/shell-subaliases/</guid><description>&lt;p>
+If you spend any time using the command line, you&amp;#39;re probably familiar
+with aliases. The idea is to substitute a short and easy name for
+frequently-typed or long commands. For example, the following common
+alias lets you shorten &lt;code class="verbatim">ls -la&lt;/code> to just &lt;code class="verbatim">ll&lt;/code>:&lt;/p>
+&lt;div class="src src-sh">
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="nb">alias&lt;/span> &lt;span class="nv">ll&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;ls -la&amp;#39;&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;/div>
+&lt;p>
+Some commands, like &lt;code class="verbatim">git&lt;/code>, provide hierarchical subcommands. To view the
+status of a git repository, you run &lt;code class="verbatim">git status&lt;/code>, where &lt;code class="verbatim">git&lt;/code> is the
+command your shell executes and &lt;code class="verbatim">status&lt;/code> is the subcommand interpreted
+by Git. Git also provides an alias feature very much like shell aliases.
+The command &lt;code class="verbatim">git config --global alias.st status&lt;/code> defines an alias &lt;code class="verbatim">st&lt;/code>
+for the &lt;code class="verbatim">status&lt;/code> subcommand, so that you only need to type &lt;code class="verbatim">git st&lt;/code>.
+What if you could define new subcommands like that anywhere you wanted?&lt;/p></description></item><item><title>Automating Hyper Light Drifter's 800 Dash Challenge on the Nintendo Switch</title><link>https://ajgrf.com/post/hyper-light-dasher/</link><pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate><guid>https://ajgrf.com/post/hyper-light-dasher/</guid><description>&lt;p>
+I do all of my gaming these days on a Nintendo Switch (with the
+exception of &lt;a href="http://www.zachtronics.com/">Zachtronics&lt;/a> games on my
+Linux machine). Lately I&amp;#39;ve been playing
+&lt;a href="https://heartmachine.com/hyper-light">Hyper Light Drifter&lt;/a>, a gorgeous
+retro-styled action adventure game that its creator calls a mix of 2D
+Zelda and Diablo. The game is challenging, but plays nearly perfectly.
+Except…&lt;/p>
+&lt;p>
+There is one optional challenge which calls for you to dash 800 times
+consecutively in a confined space. This requires you to button mash with
+precise timing while directing the character in a circle to avoid
+bumping into any walls. It&amp;#39;s brutal, and
+&lt;a href="https://old.reddit.com/r/hyperlightdrifter/">discussion spaces&lt;/a> related to
+the game are filled with stories and complaints about this challenge.&lt;/p>
+&lt;p>
+After many failed attempts and probably tens of thousands of button
+mashes later, I decided there was probably a better way. On the PC
+version, many players have decided to simply cheese the game by abusing
+the keyboard controls or even using a program to automate the entire
+feat. Doing this on the Switch is a bit trickier, though.&lt;/p></description></item><item><title>How to Set Up Dynamic DNS with OpenWrt and Gandi LiveDNS</title><link>https://ajgrf.com/post/openwrt-ddns-gandi/</link><pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate><guid>https://ajgrf.com/post/openwrt-ddns-gandi/</guid><description>&lt;p>
+&lt;a href="https://openwrt.org/">OpenWrt&lt;/a> supports quite a few dynamic DNS
+providers in its very nice ddns-scripts package. Many of them are free,
+but if you already pay for a domain name and DNS hosting at
+&lt;a href="https://www.gandi.net/en">Gandi.net&lt;/a> why not just use that?
+Unfortunately Gandi is not a supported provider, but it&amp;#39;s fairly
+straightforward to get it working with a custom update script.&lt;/p></description></item><item><title>About</title><link>https://ajgrf.com/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ajgrf.com/about/</guid><description>Hello, I&amp;#39;m Alex. I like programming, hockey, and brevity. If you&amp;#39;d like to get in touch, you can reach me through email.
+Open Source GitHub Profile: @ajgrf
+GitLab Profile: @ajgrf
+PGP: 2A39 3FFF 68F4 EF7A 3D29 12AF 6F51 20A0 22FB B2D5
+Technologies This website was crafted with Emacs and Hugo. You can find the source here.</description></item></channel></rss>
