@@ -16,7 +16,7 @@ If you'd like to get in touch, you can reach me through
 
 This website was crafted with [[https://www.gnu.org/software/emacs/][Emacs]]
 and [[https://gohugo.io/][Hugo]]. You can find
-the source [[https://gitlab.com/ajgrf/ajgrf.com][here]]. Some other
+the source [[https://github.com/ajgrf/ajgrf.com][here]]. Some other
 technologies I know include:
 
 - Web Technologies (HTML, CSS, JavaScript, JSON)
