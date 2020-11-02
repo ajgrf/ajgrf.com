@@ -207,11 +207,10 @@ pre {
 
     code, .src {
         color: #ebdbb2;
-        font-family: PragmataPro, Iosevka, "Source Code Pro", Menlo, "Noto Mono", "DejaVu Sans Mono", "Liberation Mono", Consolas, "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace;
     }
 
     p>code {
-        color: #8ec07c;
+        color: #ebdbb2;
     }
 
     .src {
