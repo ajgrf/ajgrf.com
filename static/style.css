@@ -172,37 +172,37 @@ pre {
 
 @media screen and (prefers-color-scheme: dark) {
     body {
-        background-color: #1d2021;
-        color: #ebdbb2;
+        background-color: #191b1c;
+        color: #d3cfc9;
     }
 
     nav, footer, h1, h2, h3, h4, h5, h6, .date {
-        color: #fbf1c7;
+        color: #d3cfc9;
     }
 
     nav {
-        background-color: #282828;
-        border-bottom: 1px solid #3c3836;
+        background-color: #232627;
+        border-bottom: 1px solid #3f4547;
     }
 
     nav a, nav a:visited {
-        color: #fbf1c7;
+        color: #d3cfc9;
     }
 
     footer {
-        border-top: 1px solid #3c3836;
+        border-top: 1px solid #3f4547;
     }
 
     a {
-        color: #83a598;
+        color: #7ac4ff;
     }
 
     a:visited {
-        color: #d3869b;
+        color: #84a1bf;
     }
 
     hr {
-        background-color: #3c3836;
+        background-color: #373b3e;
     }
 
     code, .src {
